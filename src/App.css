@@ -24,9 +24,10 @@ h1, h2, h3, h5, p{
 
 main {
   grid-area: content;
-  overflow-y: auto;
-  padding: 20px;
-  background-color: #f4f4f4;
+  overflow-x: auto;
+  display: flex;
+  scroll-snap-type: x proximity;
+  scroll-snap-stop: always;
 }
 
 footer {
@@ -36,8 +37,73 @@ footer {
   padding: 10px;
 }
 
+.scroll_container{
+  display: inline-flex;
+  gap: 2em;
+  padding-inline: 2em;
+}
+
+.todo_list{
+  display: flex;
+  flex-direction: column;
+  height: fit-container;
+  width: 40em;
+  padding: 10px;
+  gap: 10px;
+  border: 1px dashed lightgray;
+  border-radius: 15px;
+  overflow: auto;
+  scroll-snap-align: center;
+}
+
+.todo{
+  display: grid;
+  grid-column-gap:1em;
+  grid-row-gap: 0px;
+  border-radius: 5px;
+  padding: 10px;
+  background-color: #ddd;
+}
+
+.todo.has_completed_by {
+  grid-template-columns: auto 1fr auto;
+  grid-template-rows: auto auto;
+}
+.has_completed_by .todo_icon_wrapper { grid-area: 1 / 1 / 3 / 2; }
+.has_completed_by .todo_title { grid-area: 1 / 2 / 2 / 3; }
+.has_completed_by .todo_completed_by { grid-area: 2 / 2 / 3 / 3; }
+.has_completed_by .todo_streak { grid-area: 1 / 3 / 3 / 4; }
+
+.todo.doesnt_have_completed_by {
+  grid-template-columns: auto 1fr auto;
+  grid-template-rows: auto;
+}
+.doesnt_have_completed_by .todo_icon_wrapper { grid-area: 1 / 1 / 2 / 2; }
+.doesnt_have_completed_by .todo_title { grid-area: 1 / 2 / 2 / 3; }
+.doesnt_have_completed_by .todo_streak { grid-area: 1 / 3 / 2 / 4; }
+
+
+.todo_icon_wrapper, .todo_streak{
+  padding-inline: 10px;
+  display: grid;
+  place-items: center center;
+}
+.todo_icon{
+  height: 30px;
+}
+
+.todo_title, .todo_streak{
+  font-weight: bold;
+  font-size: 150%;
+}
+
 @media (max-height: 560px) {
   footer {
       display: none;
+  }
+}
+@media (max-width: 700px) {
+  .todo_list{
+    width: 80vw;
   }
 }

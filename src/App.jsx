@@ -25,7 +25,7 @@ function App() {
   return (
     <>
       <Nav title="Todo App"/>
-      <main></main>
+      <main><h1>Login to continue</h1></main>
       <Footer title="React Todo App" copyright="© 2024 Leon"/>
       </>
   )
